@@ -4,24 +4,28 @@
 #include <list>
 #include <iostream>
 
-int Recursive(int kyuuryou, int zikan, int kotei) {
-	if (kyuuryou >= kotei) {
-		printf("%d時間後にこえる\n", zikan);
-		return (zikan);
-	}
-	printf("%d %d\n", kyuuryou, kotei);
-	kyuuryou = kyuuryou *2 - 50;
+template <typename Type>
 
-	return (Recursive(kyuuryou, ++zikan, kotei +=1226));
+Type Min(Type a, Type b) {
+
+	///関数テンプレート
+	if (a > b) {
+		return static_cast<Type>(b);
+	}
+	else {
+		return static_cast<Type> (a);
+	}
 }
 
+
 int main() {
-	system("chcp 65001 > nul");
-	int saiki = 100;
-	int ippan = 1226;
-	int zikan = 0;
-	int resullt1 = Recursive(saiki, zikan, ippan);
+
+	//計算と結果出力
+	printf("%d\n", Min<int>(128, 256));
+	printf("%f\n", Min<float>(52.5f, 55.0f));
+	printf("%lf\n", Min<double>(3.14159265, 2.7182818281));
 
 	return 0;
 }
+
 
