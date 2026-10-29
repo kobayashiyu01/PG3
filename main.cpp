@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
-using namespace std;
 
-// コールバック関数の型
-typedef void (*Callback)(int, int);
+using namespace std;
 
 // 結果表示を遅らせる関数
 void DelayReveal(void (*fn)(int, int), unsigned int delayMs,
@@ -18,23 +16,7 @@ void DelayReveal(void (*fn)(int, int), unsigned int delayMs,
     fn(roll, userGuess);
 }
 
-// 結果を判定して表示する関数
-void ShowResult(int roll, int userGuess) {
-
-    // 出目とユーザーの入力を比較
-    if ((roll % 2 == 1 && userGuess == 1) ||
-        (roll % 2 == 0 && userGuess == 0)) {
-
-        printf("正解\n");
-    }
-    else {
-        printf("不正解\n");
-    }
-
-    printf("出目は%dでした。\n", roll);
-}
-
-// サイコロの出目を決める関数
+// サイコロの出目を決定する関数
 int roll_dice() {
     return rand() % 6 + 1;
 }
@@ -54,10 +36,24 @@ system("chcp 65001 > nul");
     // サイコロの出目を決定
     int roll = roll_dice();
 
+    // ラムダ式で結果を判定する関数を作成
+    auto ShowResult = [](int roll, int userGuess) {
+
+        if ((roll % 2 == 1 && userGuess == 1) ||
+            (roll % 2 == 0 && userGuess == 0)) {
+
+            printf("正解\n");
+        }
+        else {
+            printf("不正解\n");
+        }
+
+        printf("出目は%dでした。\n", roll);
+        };
+
     // 3秒後に結果を表示
     DelayReveal(ShowResult, 3000, roll, userGuess);
 
     return 0;
 }
- 
 
