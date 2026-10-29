@@ -1,23 +1,63 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <windows.h>
+using namespace std;
 
-int Recursive(int kyuuryou, int zikan, int kotei) {
-	if (kyuuryou >= kotei) {
-		printf("%d時間後にこえる\n", zikan);
-		return (zikan);
-	}
-	printf("%d %d\n", kyuuryou, kotei);
-	kyuuryou = kyuuryou *2 - 50;
+// コールバック関数の型
+typedef void (*Callback)(int, int);
 
-	return (Recursive(kyuuryou, zikan + 1, kotei +1226));
+// 結果表示を遅らせる関数
+void DelayReveal(void (*fn)(int, int), unsigned int delayMs,
+    int roll, int userGuess) {
+
+    // 指定した時間だけ待つ
+    Sleep(delayMs);
+
+    // コールバック関数を実行する
+    fn(roll, userGuess);
 }
 
+// 結果を判定して表示する関数
+void ShowResult(int roll, int userGuess) {
+
+    // 出目とユーザーの入力を比較
+    if ((roll % 2 == 1 && userGuess == 1) ||
+        (roll % 2 == 0 && userGuess == 0)) {
+
+        printf("正解\n");
+    }
+    else {
+        printf("不正解\n");
+    }
+
+    printf("出目は%dでした。\n", roll);
+}
+
+// サイコロの出目を決める関数
+int roll_dice() {
+    return rand() % 6 + 1;
+}
+
+// メイン関数
 int main() {
+system("chcp 65001 > nul");
+    // 乱数を初期化
+    srand((unsigned int)time(NULL));
 
-	int saiki = 100;
-	int ippan = 1226;
-	int zikan = 0;
-	int resullt1 = Recursive(saiki, zikan, ippan);
+    int userGuess;
 
-	return 0;
+    // ユーザーから入力
+    printf("奇数なら1、偶数なら0を入力してください: ");
+    scanf_s("%d", &userGuess);
+
+    // サイコロの出目を決定
+    int roll = roll_dice();
+
+    // 3秒後に結果を表示
+    DelayReveal(ShowResult, 3000, roll, userGuess);
+
+    return 0;
 }
+ 
 
