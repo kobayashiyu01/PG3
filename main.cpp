@@ -5,34 +5,24 @@
 #include "Enemy.h"
 #include "Min.h"
 #include <iostream>
-
+#include "Animal.h"
 using namespace std;
 
 int main() {
-	TemplateClass<int, float> intFloatTemplate(100, 50.0f);
-	TemplateClass<int, double> intDoubleTemplate(80, 20.0);
-	TemplateClass<float, int> floatIntTemplate(2.0f, 18);
-	TemplateClass<float, double> floatDoubleTemplate(11.0f, 3.5);
-	TemplateClass<double, int> doubleIntTemplate(234.0, 123);
-	TemplateClass<double, float> doubleFloatTemplate(400.1, 500.2f);
+    Animal animal;
+    Dog dog;
+    Cat cat;
 
-	std::cout << "int(100)&float(50.0f):"
-		<< intFloatTemplate.Min() << std::endl;
+    // 親クラスのポインタで各オブジェクトを指す
+    Animal* animal1 = &animal;
+    Animal* animal2 = &dog;
+    Animal* animal3 = &cat;
 
-	std::cout << "int(80)&double(20.0):"
-		<< intDoubleTemplate.Min() << std::endl;
+    animal1->sound();
+    animal2->sound();
+    animal3->sound();
 
-	std::cout << "float(2.0f)&int(18):"
-		<< floatIntTemplate.Min() << std::endl;
-
-	std::cout << "float(11.0f)&double(3.5):"
-		<< floatDoubleTemplate.Min() << std::endl;
-
-	std::cout << "double(234.0)&int(123):"
-		<< doubleIntTemplate.Min() << std::endl;
-
-	std::cout << "double(400.1)&float(500.2):"
-		<< doubleFloatTemplate.Min() << std::endl;
+    return 0;
 
 	return 0;
 }
