@@ -8,7 +8,8 @@ public:
     void Retreat();  
 
     
-    static void (Enemy::*table[])();
+    
 private:
     int index = 0;
+    static void (Enemy::*table[])();
 };

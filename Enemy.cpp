@@ -24,7 +24,7 @@ void Enemy::Retreat() {
 void Enemy::Update() {
 
     
-    (this->*Enemy::table[2])();
+    (this->*Enemy::table[index])();
 
     cout << "tuginojyoutainiikou(0: yes, hoka: no)";
     int input;

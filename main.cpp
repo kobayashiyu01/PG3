@@ -1,29 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <windows.h>
+#include <iostream>
 #include "Enemy.h"
 #include "Min.h"
-#include <iostream>
 #include "Animal.h"
+#include "IShape.h"
+
 using namespace std;
 
 int main() {
-    Animal animal;
-    Dog dog;
-    Cat cat;
+   
+    Enemy enemy;
+    while (1) enemy.Update();
 
-    // 親クラスのポインタで各オブジェクトを指す
-    Animal* animal1 = &animal;
-    Animal* animal2 = &dog;
-    Animal* animal3 = &cat;
+    IShape* shapes[2];
+    shapes[0] = new Circle(2.0f);
+    shapes[1] = new Rectangle(3.0f, 4.0f);
 
-    animal1->sound();
-    animal2->sound();
-    animal3->sound();
-
-    return 0;
-
+    for (int i = 0; i < 2;i++) {
+        shapes[i]->Size();
+        shapes[i]->Draw();
+    }
+   
+    delete shapes[0];
+    delete shapes[1];
 	return 0;
 }
 
