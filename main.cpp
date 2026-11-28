@@ -11,8 +11,8 @@ using namespace std;
 
 int main() {
    
-    Enemy enemy;
-    while (1) enemy.Update();
+   /* Enemy enemy;
+    while (1) enemy.Update();*/
 
     IShape* shapes[2];
     shapes[0] = new Circle(2.0f);
